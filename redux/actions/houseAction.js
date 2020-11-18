@@ -51,8 +51,7 @@ export const createHome = ({
 		});
 
 		// convert data to json
-		const responseData = (await response).json();
-		console.log(response);
+		const responseData = await response.json();
 
 		// dispatch the action (type + payload)
 		dispatch({

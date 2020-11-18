@@ -16,10 +16,11 @@ export default function (state = initialState, action) {
 				houses: action.payload, // we pass the data from payload to houses-state
 			};
 		case CREATE_HOUSES:
+			// console.log(action.payload.data);
 			return {
 				...state,
 				// add data to the houses array
-				houses: state.houses.concat(action.payload), // we make use of .concat() to add data that is passed form action.payload to houses array
+				houses: state.houses.concat(action.payload.data), // we make use of .concat() to add data that is passed form action.payload to houses array
 			};
 	}
 	//current state

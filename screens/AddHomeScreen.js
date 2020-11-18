@@ -7,6 +7,7 @@ import {
 	TextInput,
 	Button,
 	KeyboardAvoidingView,
+	Alert,
 } from 'react-native';
 
 // import Formik
@@ -14,6 +15,12 @@ import { Formik } from 'formik';
 
 // import yup
 import * as yup from 'yup';
+
+// import useDispatch
+import { useDispatch } from 'react-redux';
+
+// import all actions from houseAction
+import * as houseAction from '../redux/actions/houseAction';
 
 // Validation Schema for form
 const formSchema = yup.object({
@@ -27,6 +34,9 @@ const formSchema = yup.object({
 });
 
 const AddHomeScreen = () => {
+	// init useDispatch, we can now dispatch action when Formik button is clicked
+	const dispatch = useDispatch();
+
 	return (
 		<KeyboardAvoidingView
 			behavior="padding"
@@ -48,7 +58,15 @@ const AddHomeScreen = () => {
 					}}
 					//
 					onSubmit={(values) => {
-						console.log(values);
+						// console.log(values);
+						dispatch(houseAction.createHome(values))
+							.then(() => {
+								// react-native alert component
+								Alert.alert('Created succesfully.');
+							})
+							.catch(() => {
+								Alert.alert('An error occurred. Try Again.', [{ text: 'OK' }]);
+							});
 					}}
 					validationSchema={formSchema} // pass the validation schema we created
 				>
