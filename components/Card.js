@@ -1,29 +1,41 @@
 import React from 'react';
-import { StyleSheet, View, Text, ImageBackground } from 'react-native';
+import {
+	StyleSheet,
+	View,
+	Text,
+	ImageBackground,
+	TouchableOpacity,
+} from 'react-native';
 
-const Card = () => {
+const Card = (props) => {
 	return (
-		<View style={styles.card}>
-			<View style={styles.titleContainer}>
-				<Text style={styles.title}>random Title</Text>
-			</View>
+		<TouchableOpacity
+			onPress={() => {
+				props.navigation.navigate('HomeDetails');
+			}}
+		>
+			<View style={styles.card}>
+				<View style={styles.titleContainer}>
+					<Text style={styles.title}>random Title</Text>
+				</View>
 
-			<View style={styles.imageContainer}>
-				<ImageBackground
-					style={styles.image}
-					source={require('../assets/images/house.jpeg')}
-				>
-					<Text style={styles.price}>$240,000</Text>
-					<View style={styles.year}>
-						<Text style={styles.yearText}>2020</Text>
-					</View>
-				</ImageBackground>
-			</View>
+				<View style={styles.imageContainer}>
+					<ImageBackground
+						style={styles.image}
+						source={require('../assets/images/house.jpeg')}
+					>
+						<Text style={styles.price}>$240,000</Text>
+						<View style={styles.year}>
+							<Text style={styles.yearText}>2020</Text>
+						</View>
+					</ImageBackground>
+				</View>
 
-			<View style={styles.description}>
-				<Text style={styles.descriptionText}>Description Dummy data</Text>
+				<View style={styles.description}>
+					<Text style={styles.descriptionText}>Description Dummy data</Text>
+				</View>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 };
 
