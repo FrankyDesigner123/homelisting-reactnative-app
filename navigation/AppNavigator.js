@@ -69,6 +69,7 @@ function AppNavigator() {
 						let iconName;
 						if (route.name == 'Home') {
 							iconName = 'home';
+						} else if (route.name == 'About') {
 							iconName = 'info';
 						}
 						// return MaterialIcon
