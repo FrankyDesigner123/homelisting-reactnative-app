@@ -4,6 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+// import icon components from Expo
+import { MaterialIcons } from '@expo/vector-icons';
+
 // import all the screens we need in navigation
 import AboutScreen from '../screens/AboutScreen';
 import AddHomeScreen from '../screens/AddHomeScreen';
@@ -54,10 +57,25 @@ function AboutStackNavigator() {
 // define function AppNavigator where we use Tab.Navigator
 function AppNavigator() {
 	return (
-		// Wrap NavigationContainer because its the root of the app
+		// Wrap NavigationContainer because its the route of the app
 		<NavigationContainer>
 			{/* Set up Tab.Navigator */}
-			<Tab.Navigator>
+			<Tab.Navigator
+				// in screenOptions we give an object with function
+				// this function has access to props from react-naviation {route}
+				screenOptions={({ route }) => ({
+					// logic to check if route is home then show Home icon from MaterialIcon etc ..
+					tabBarIcon: () => {
+						let iconName;
+						if (route.name == 'Home') {
+							iconName = 'home';
+							iconName = 'info';
+						}
+						// return MaterialIcon
+						return <MaterialIcons name={iconName} size={24} />;
+					},
+				})}
+			>
 				{/* Setting up screens in Tab.Navigator*/}
 				<Tab.Screen name="Home" component={stackNavigator} />
 				<Tab.Screen name="About" component={AboutStackNavigator} />
