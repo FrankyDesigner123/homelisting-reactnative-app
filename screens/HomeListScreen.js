@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
+import Card from '../components/Card';
+
 const HomeListScreen = () => {
 	return (
 		<View>
-			<Text>About Screen</Text>
+			<Card />
 		</View>
 	);
 };
