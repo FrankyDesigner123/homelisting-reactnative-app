@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	StyleSheet,
 	View,
@@ -8,6 +8,7 @@ import {
 	Button,
 	KeyboardAvoidingView,
 	Alert,
+	ActivityIndicator,
 } from 'react-native';
 
 // import Formik
@@ -34,6 +35,18 @@ const formSchema = yup.object({
 });
 
 const AddHomeScreen = () => {
+	// create loading spinner state
+	const [isLoading, setIsLoading] = useState(false);
+
+	// logic when to show spinner
+	if (isLoading) {
+		return (
+			<View style={styles.centered}>
+				<ActivityIndicator size="large" />
+			</View>
+		);
+	}
+
 	// init useDispatch, we can now dispatch action when Formik button is clicked
 	const dispatch = useDispatch();
 
@@ -58,13 +71,16 @@ const AddHomeScreen = () => {
 					}}
 					//
 					onSubmit={(values) => {
-						// console.log(values);
+						// when req is made loadin is true
+						setIsLoading(true);
 						dispatch(houseAction.createHome(values))
 							.then(() => {
 								// react-native alert component
+								setIsLoading(false);
 								Alert.alert('Created succesfully.');
 							})
 							.catch(() => {
+								setIsLoading(false);
 								Alert.alert('An error occurred. Try Again.', [{ text: 'OK' }]);
 							});
 					}}
@@ -209,6 +225,11 @@ const styles = StyleSheet.create({
 	},
 	errorText: {
 		color: 'red',
+	},
+	centered: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 });
 
