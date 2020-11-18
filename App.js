@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import AppNavigator from './navigation/AppNavigator';
 
 // import the store from redux
-import store from './redux/reducers/HouseReducer';
+import store from './redux/store';
 
 export default function App() {
 	return (

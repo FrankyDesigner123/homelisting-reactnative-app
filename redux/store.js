@@ -1,7 +1,7 @@
 // import createStore, ApplyMiddleware and combineReducers comopnent from the redux package
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 // import thunk from react-redux for async operations
-import thunk from 'react-redux';
+import thunk from 'redux-thunk';
 // for debugging
 import { composeWithDevTools } from 'redux-devtools-extension';
 
