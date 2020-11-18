@@ -11,7 +11,7 @@ const Card = (props) => {
 	return (
 		<TouchableOpacity
 			onPress={() => {
-				props.navigation.navigate('HomeDetails');
+				props.navigation.navigate('HomeDetails', { houseId: props.id }); // add 2nd param is the id of the card
 			}}
 		>
 			<View style={styles.card}>

@@ -41,6 +41,7 @@ const HomeListScreen = (props) => {
 						price={item.price}
 						image={item.image}
 						yearBuilt={item.yearBuilt}
+						id={item._id} //to get access to the props._id
 					/>
 				)}
 			/>
