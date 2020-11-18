@@ -7,11 +7,24 @@ import {
 	TextInput,
 	Button,
 	KeyboardAvoidingView,
-	Keyboard,
 } from 'react-native';
 
 // import Formik
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
+
+// import yup
+import * as yup from 'yup';
+
+// Validation Schema for form
+const formSchema = yup.object({
+	title: yup.string().required().min(3).max(50),
+	price: yup.number().required(),
+	yearBuilt: yup.number().required(),
+	image: yup.string().required(),
+	address: yup.string().required().min(10).max(50),
+	description: yup.string().required().min(10),
+	homeType: yup.string().required(),
+});
 
 const AddHomeScreen = () => {
 	return (
@@ -37,6 +50,7 @@ const AddHomeScreen = () => {
 					onSubmit={(values) => {
 						console.log(values);
 					}}
+					validationSchema={formSchema} // pass the validation schema we created
 				>
 					{(props) => (
 						<View style={styles.form}>
@@ -47,7 +61,14 @@ const AddHomeScreen = () => {
 									// handle the values change of the textInput (this is a prop from Formik)
 									onChangeText={props.handleChange('title')}
 									value={props.values.title}
+									// onBlur .handleBlur when you click and leave the field it will show error
+									onBlur={props.handleBlur('title')}
 								/>
+								{/* error text */}
+								<Text style={styles.errorText}>
+									{/* props.touched show error when user clicks on input */}
+									{props.touched.title && props.errors.title}
+								</Text>
 							</View>
 
 							<View style={styles.formGroup}>
@@ -56,7 +77,11 @@ const AddHomeScreen = () => {
 									style={styles.input}
 									onChangeText={props.handleChange('image')}
 									value={props.values.image}
+									onBlur={props.handleBlur('image')}
 								/>
+								<Text style={styles.errorText}>
+									{props.touched.image && props.errors.image}
+								</Text>
 							</View>
 
 							<View style={styles.formGroup}>
@@ -65,7 +90,11 @@ const AddHomeScreen = () => {
 									style={styles.input}
 									onChangeText={props.handleChange('homeType')}
 									value={props.values.homeType}
+									onBlur={props.handleBlur('homeType')}
 								/>
+								<Text style={styles.errorText}>
+									{props.touched.homeType && props.errors.homeType}
+								</Text>
 							</View>
 
 							<View style={styles.formGroup}>
@@ -75,8 +104,13 @@ const AddHomeScreen = () => {
 									keyboardType="numeric"
 									onChangeText={props.handleChange('price')}
 									value={props.values.price}
+									onBlur={props.handleBlur('price')}
 								/>
+								<Text style={styles.errorText}>
+									{props.touched.price && props.errors.price}
+								</Text>
 							</View>
+
 							<View style={styles.formGroup}>
 								<Text style={styles.label}>Year Built:</Text>
 								<TextInput
@@ -85,16 +119,26 @@ const AddHomeScreen = () => {
 									keyboardType="numeric"
 									onChangeText={props.handleChange('yearBuilt')}
 									value={props.values.yearBuilt}
+									onBlur={props.handleBlur('yearBuilt')}
 								/>
+								<Text style={styles.errorText}>
+									{props.touched.yearBuilt && props.errors.yearBuilt}
+								</Text>
 							</View>
+
 							<View style={styles.formGroup}>
 								<Text style={styles.label}>Address:</Text>
 								<TextInput
 									style={styles.input}
 									onChangeText={props.handleChange('address')}
 									value={props.values.address}
+									onBlur={props.handleBlur('address')}
 								/>
+								<Text style={styles.errorText}>
+									{props.touched.address && props.errors.address}
+								</Text>
 							</View>
+
 							<View style={styles.formGroup}>
 								<Text style={styles.label}>Description</Text>
 								<TextInput
@@ -102,7 +146,11 @@ const AddHomeScreen = () => {
 									style={styles.input}
 									onChangeText={props.handleChange('description')}
 									value={props.values.description}
+									onBlur={props.handleBlur('description')}
 								/>
+								<Text style={styles.errorText}>
+									{props.touched.description && props.errors.description}
+								</Text>
 							</View>
 
 							<View>
@@ -140,6 +188,9 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		marginTop: 20,
+	},
+	errorText: {
+		color: 'red',
 	},
 });
 
