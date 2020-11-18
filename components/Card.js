@@ -16,23 +16,28 @@ const Card = (props) => {
 		>
 			<View style={styles.card}>
 				<View style={styles.titleContainer}>
-					<Text style={styles.title}>random Title</Text>
+					<Text style={styles.title}>
+						{props.title.length > 30
+							? props.title.slice(0, 30) + ' ...'
+							: props.title}
+					</Text>
 				</View>
 
 				<View style={styles.imageContainer}>
-					<ImageBackground
-						style={styles.image}
-						source={require('../assets/images/house.jpeg')}
-					>
-						<Text style={styles.price}>$240,000</Text>
+					<ImageBackground style={styles.image} source={{ uri: props.image }}>
+						<Text style={styles.price}>{props.price}</Text>
 						<View style={styles.year}>
-							<Text style={styles.yearText}>2020</Text>
+							<Text style={styles.yearText}>{props.yearBuilt}</Text>
 						</View>
 					</ImageBackground>
 				</View>
 
 				<View style={styles.description}>
-					<Text style={styles.descriptionText}>Description Dummy data</Text>
+					<Text style={styles.descriptionText}>
+						{props.description.length > 100
+							? props.description.slice(0, 100) + ' ...'
+							: props.description}
+					</Text>
 				</View>
 			</View>
 		</TouchableOpacity>

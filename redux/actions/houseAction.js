@@ -8,12 +8,12 @@ export const fetchHouses = () => {
 		// add logic to fetch houses from API
 		const result = await fetch('http://192.168.1.63:3000/api/houses');
 		const resultData = await result.json();
-		// console.log(resultData);
+		console.log(resultData);
 
 		// action needs to return an object with type and payload
 		dispatch({
 			type: FETCH_HOUSES,
-			payload: 1,
+			payload: resultData,
 		});
 	};
 };
